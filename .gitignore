@@ -1,0 +1,45 @@
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# JVM crash logs
+hs_err_pid*
+
+# Build output
+target/
+build/
+out/
+
+# IDEs
+## IntelliJ
+.idea/
+*.iml
+## Eclipse
+.classpath
+.project
+.settings/
+## NetBeans
+nbproject/private/
+nbbuild/
+dist/
+## VSCode
+.vscode/
+
+# Gradle
+.gradle/
+!**/gradle-wrapper.jar
+
+# Maven wrapper
+.mvn/
+.mvn/wrapper/maven-wrapper.jar
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# Temporary files
+*.tmp
+*~
