@@ -1,0 +1,23 @@
+# --- COMPILADOS E DEPENDÊNCIAS ---
+**/target/
+**/build/
+**/.gradle/
+**/out/
+
+# --- IDEs (IntelliJ, VS Code, Eclipse) ---
+**/.idea/
+**/*.iml
+**/.vscode/
+**/.settings/
+**/.project/
+**/.classpath/
+**/.factorypath/
+
+# --- SISTEMA E LOGS ---
+**/*.log
+**/.DS_Store
+Thumbs.db
+
+# --- ARQUIVOS DE AMBIENTE (Segurança) ---
+**/*.env
+**/local.properties
