@@ -112,6 +112,31 @@ public class ProductService {
     }
 
     /**
+     * Decrementa o estoque de um produto de forma segura para ambientes concorrentes,
+     * utilizando bloqueio pessimista (PESSIMISTIC_WRITE) para evitar race conditions.
+     * Apenas uma transação por vez conseguirá ler e modificar o registro do produto.
+     *
+     * @param id       UUID do produto a ter o estoque reduzido.
+     * @param quantity Quantidade a ser decrementada. Deve ser positiva.
+     * @throws ProductNotFoundException  se o produto não for encontrado.
+     * @throws IllegalStateException     se o estoque for insuficiente para a operação.
+     */
+    @Transactional
+    public void decrementStock(UUID id, int quantity) {
+        Product product = productRepository.findByIdWithLock(id)
+                .orElseThrow(() -> new ProductNotFoundException("Produto não encontrado com o ID: " + id));
+
+        if (product.getStockQuantity() < quantity) {
+            throw new IllegalStateException(
+                    "Estoque insuficiente para o produto com ID: " + id +
+                    ". Disponível: " + product.getStockQuantity() + ", solicitado: " + quantity);
+        }
+
+        product.setStockQuantity(product.getStockQuantity() - quantity);
+        productRepository.save(product);
+    }
+
+    /**
      * Converte internamente uma entidade Product em seu DTO correspondente para retorno da API.
      *
      * @param product A entidade original a ser mapeada.
